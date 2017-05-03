@@ -22,7 +22,10 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid x:Name="PaneTitleBar"/>
                         <Button Content=""
@@ -35,6 +38,32 @@
                                 Style="{StaticResource NavigationBackButtonNormalStyle}"
                                 ToolTipService.ToolTip="Hamburger Menu"
                                 Click="Button_Click"/>
+                        <StackPanel Grid.Row="2">
+                            <RadioButton Content="Home" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                            <RadioButton Content="Liked" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                            <RadioButton Content="Favorites" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                            <RadioButton Content="History" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                            <RadioButton Content="Watch later" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                            <RadioButton Content="Upload video" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
+                        </StackPanel>
+                        <ListView Grid.Row="3"
+                                  Header="Subscribed to"/>
+                        <RadioButton Grid.Row="4"
+                                     Content="Settings" Tag=""
+                                     GroupName="menu"
+                                     Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"/>
                     </Grid>
                 </Grid>
             </SplitView.Pane>
