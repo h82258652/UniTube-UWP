@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UniTube.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -70,6 +74,25 @@ namespace UniTube
                 }
                 // Asegurarse de que la ventana actual está activa.
                 Window.Current.Activate();
+            }
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+            {
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                if (titleBar != null)
+                {
+                    titleBar.ButtonBackgroundColor = Colors.Transparent;
+                    titleBar.ButtonHoverBackgroundColor = Color.FromArgb(25, 255, 255, 255);
+                    titleBar.ButtonPressedBackgroundColor = Color.FromArgb(51, 255, 255, 255);
+                    titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                    titleBar.ButtonForegroundColor = Colors.White;
+                    titleBar.ButtonHoverForegroundColor = Colors.White;
+                    titleBar.ButtonPressedForegroundColor = Colors.White;
+                    titleBar.ButtonInactiveForegroundColor = Colors.LightGray;
+                }
+
+                ApplicationView.PreferredLaunchViewSize = new Size(1024, 651);
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             }
         }
 
