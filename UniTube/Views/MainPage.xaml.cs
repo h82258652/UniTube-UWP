@@ -76,6 +76,8 @@ namespace UniTube.Views
             coreTitleBar.ExtendViewIntoTitleBar = true;
 
             TitleBar.Height = coreTitleBar.Height;
+            PaneTitleBar.Height = coreTitleBar.Height;
+            ContentTitleBar.Height = coreTitleBar.Height;
             Window.Current.SetTitleBar(TitleBar);
 
             coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
