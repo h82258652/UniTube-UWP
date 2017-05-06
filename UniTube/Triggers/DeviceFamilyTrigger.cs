@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Windows.UI.Xaml;
 
 namespace UniTube.Triggers
@@ -19,10 +16,8 @@ namespace UniTube.Triggers
             deviceFamily = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
         }
 
-        public DeviceFamilyTrigger()
-        {
-
-        }
+        public static readonly DependencyProperty DeviceFamilyProperty = DependencyProperty.Register(
+            nameof(DeviceFamily), typeof(DeviceFamily), typeof(DeviceFamilyTrigger), new PropertyMetadata(DeviceFamily.Unknown, OnDeviceTypePropertyChanged));
 
         public DeviceFamily DeviceFamily
         {
@@ -30,28 +25,34 @@ namespace UniTube.Triggers
             set { SetValue(DeviceFamilyProperty, value); }
         }
 
-        public static readonly DependencyProperty DeviceFamilyProperty = DependencyProperty.Register(
-            nameof(DeviceFamily), typeof(DeviceFamily), typeof(DeviceFamilyTrigger), new PropertyMetadata(DeviceFamily.Unknown, OnDeviceTypePropertyChanged));
-
         private static void OnDeviceTypePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var obj = (DeviceFamilyTrigger)d;
             var val = (DeviceFamily)e.NewValue;
-            if (deviceFamily == "Windows.Mobile")
-                obj.IsActive = (val == DeviceFamily.Mobile);
-            else if (deviceFamily == "Windows.Desktop")
-                obj.IsActive = (val == DeviceFamily.Desktop);
-            else if (deviceFamily == "Windows.Team")
-                obj.IsActive = (val == DeviceFamily.Team);
-            else if (deviceFamily == "Windows.IoT")
-                obj.IsActive = (val == DeviceFamily.IoT);
-            else if (deviceFamily == "Windows.Holographic")
-                obj.IsActive = (val == DeviceFamily.Holographic);
-            else if (deviceFamily == "Windows.Xbox")
-                obj.IsActive = (val == DeviceFamily.Xbox);
-            else
-                obj.IsActive = (val == DeviceFamily.Unknown);
-            
+            switch (deviceFamily)
+            {
+                case "Windows.Mobile":
+                    obj.IsActive = (val == DeviceFamily.Mobile);
+                    break;
+                case "Windows.Desktop":
+                    obj.IsActive = (val == DeviceFamily.Desktop);
+                    break;
+                case "Windows.Team":
+                    obj.IsActive = (val == DeviceFamily.Team);
+                    break;
+                case "Windows.IoT":
+                    obj.IsActive = (val == DeviceFamily.IoT);
+                    break;
+                case "Windows.Holographic":
+                    obj.IsActive = (val == DeviceFamily.Holographic);
+                    break;
+                case "Windows.Xbox":
+                    obj.IsActive = (val == DeviceFamily.Xbox);
+                    break;
+                default:
+                    obj.IsActive = (val == DeviceFamily.Unknown);
+                    break;
+            }           
         }
 
         #region ITriggerValue
@@ -79,12 +80,12 @@ namespace UniTube.Triggers
 
     public enum DeviceFamily
     {
-        Unknown = 0,
-        Desktop = 1,
-        Mobile = 2,
-        Team = 3,
-        IoT = 4,
-        Xbox = 5,
+        Unknown     = 0,
+        Desktop     = 1,
+        Mobile      = 2,
+        Team        = 3,
+        IoT         = 4,
+        Xbox        = 5,
         Holographic = 6
     }
 }
