@@ -27,6 +27,8 @@
                     <VisualState.Setters>
                         <Setter Target="splitView.PaneBackground" Value="{ThemeResource PaneBackdropBlur}"/>
                         <Setter Target="splitView.Background" Value="{ThemeResource ContentBackgroundBrush}"/>
+                        <Setter Target="SearchBar.Visibility" Value="Collapsed"/>
+                        <Setter Target="HamburgerButton.RequestedTheme" Value="Dark"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WindowSmall">
@@ -36,6 +38,7 @@
                     <VisualState.Setters>
                         <Setter Target="splitView.DisplayMode" Value="CompactInline"/>
                         <Setter Target="splitView.IsPaneOpen" Value="False"/>
+                        <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WindowLarge">
@@ -45,6 +48,7 @@
                     <VisualState.Setters>
                         <Setter Target="splitView.DisplayMode" Value="CompactInline"/>
                         <Setter Target="splitView.IsPaneOpen" Value="True"/>
+                        <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -174,7 +178,8 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Button Content=""
+                    <Button Name="SearchButton"
+                            Content=""
                             Height="48" Width="48"
                             FontFamily="Segoe MDL2 Assets"
                             FontSize="20"
@@ -185,13 +190,21 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Grid.Row="1"/>
+                    <AutoSuggestBox Name="SearchBar"
+                                    PlaceholderText="Search"
+                                    QueryIcon="Find"
+                                    Width="240"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 8 10 8"
+                                    Grid.Row="1"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
         <StackPanel VerticalAlignment="Top">
             <Grid x:Name="TitleBar"
                   Background="Transparent"/>
-            <Button Content=""
+            <Button Name="HamburgerButton"
+                    Content=""
                     Height="48" Width="48"
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="20"
