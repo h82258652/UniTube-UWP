@@ -5,9 +5,9 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
-            <Color x:Key="PaneBackgroundColor">#E2E2E2</Color>
+            <Color x:Key="PaneBackgroundColor">#C9C9C9</Color>
             <SolidColorBrush x:Key="PaneBackgroundBrush" Color="{StaticResource PaneBackgroundColor}"/>
-            <Color x:Key="ContentBackgroundColor">#C9C9C9</Color>
+            <Color x:Key="ContentBackgroundColor">#E2E2E2</Color>
             <SolidColorBrush x:Key="ContentBackgroundBrush" Color="{StaticResource ContentBackgroundColor}"/>
             <Color x:Key="AccentColor">#D32F2F</Color>
             <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
