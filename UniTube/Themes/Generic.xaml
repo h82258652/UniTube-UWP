@@ -5,23 +5,23 @@
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
-            <Color x:Key="PaneBackgroundColor">#C9C9C9</Color>
+            <Color x:Key="PaneBackgroundColor">#D5D5D5</Color>
             <SolidColorBrush x:Key="PaneBackgroundBrush" Color="{StaticResource PaneBackgroundColor}"/>
             <Color x:Key="ContentBackgroundColor">#E2E2E2</Color>
             <SolidColorBrush x:Key="ContentBackgroundBrush" Color="{StaticResource ContentBackgroundColor}"/>
             <Color x:Key="AccentColor">#D32F2F</Color>
             <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
-            <Color x:Key="TransparentColor">#00C9C9C9</Color>
+            <Color x:Key="TransparentColor">#00E2E2E2</Color>
             <SolidColorBrush x:Key="TransparentBrush" Color="{StaticResource TransparentColor}"/>
         </ResourceDictionary>
         <ResourceDictionary x:Key="Dark">
-            <Color x:Key="PaneBackgroundColor">#303030</Color>
+            <Color x:Key="PaneBackgroundColor">#343434</Color>
             <SolidColorBrush x:Key="PaneBackgroundBrush" Color="{StaticResource PaneBackgroundColor}"/>
-            <Color x:Key="ContentBackgroundColor">#171717</Color>
+            <Color x:Key="ContentBackgroundColor">#1D1D1D</Color>
             <SolidColorBrush x:Key="ContentBackgroundBrush" Color="{StaticResource ContentBackgroundColor}"/>
             <Color x:Key="AccentColor">#0078D7</Color>
             <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
-            <Color x:Key="TransparentColor">#00171717</Color>
+            <Color x:Key="TransparentColor">#001D1D1D</Color>
             <SolidColorBrush x:Key="TransparentBrush" Color="{StaticResource TransparentColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
@@ -86,6 +86,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="SearchBarStyle" TargetType="TextBox">
+        
     </Style>
     
 </ResourceDictionary>
