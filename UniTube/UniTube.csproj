@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Brushes\BackdropBrush.cs" />
     <Compile Include="Brushes\HostBackdropBrush.cs" />
     <Compile Include="Controls\Extensions.cs" />
     <Compile Include="Controls\SwipeableSplitView.cs" />
