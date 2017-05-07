@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Brushes\HostBackdropBrush.cs" />
     <Compile Include="Controls\Extensions.cs" />
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +185,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
