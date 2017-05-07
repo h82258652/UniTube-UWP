@@ -13,12 +13,22 @@
         <ResourceDictionary>
             <brushes:HostBackdropBrush x:Key="PaneBackground" Tint="{ThemeResource PaneBackgroundColor}"/>
             <brushes:HostBackdropBrush x:Key="ContentBackground" Tint="{ThemeResource ContentBackgroundColor}"/>
+            <brushes:BackdropBrush x:Key="PaneBackdropBlur" Tint="{ThemeResource PaneBackgroundColor}"/>
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid Name="RootGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WidthStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="splitView.PaneBackground" Value="{ThemeResource PaneBackdropBlur}"/>
+                        <Setter Target="splitView.Background" Value="{ThemeResource ContentBackgroundBrush}"/>
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState x:Name="WindowSmall">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="500"/>
@@ -49,25 +59,13 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-            <VisualStateGroup x:Name="DeviceFamilyStates">
-                <VisualState x:Name="DesktopState">
-                    <VisualState.StateTriggers>
-                        <triggers:DeviceFamilyTrigger DeviceFamily="Desktop"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="splitView.PaneBackground" Value="{ThemeResource PaneBackground}"/>
-                        <Setter Target="splitView.Background" Value="{ThemeResource ContentBackground}"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <SplitView Name="splitView"
                    DisplayMode="Overlay"
                    IsPaneOpen="False"
                    OpenPaneLength="250"
-                   LightDismissOverlayMode="On"
-                   PaneBackground="{ThemeResource PaneBackgroundBrush}"
-                   Background="{ThemeResource ContentBackgroundBrush}">
+                   PaneBackground="{ThemeResource PaneBackground}"
+                   Background="{ThemeResource ContentBackground}">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -94,7 +92,7 @@
                                   VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <RadioButton Content="Home" Tag=""
-                                         GroupName="menu"
+                                         GroupName="menu" IsChecked="True"
                                          Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
                                          ToolTipService.ToolTip="Home"/>
                             <RadioButton Content="Liked" Tag=""
