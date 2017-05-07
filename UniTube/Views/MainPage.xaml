@@ -17,7 +17,8 @@
         </ResourceDictionary>
     </Page.Resources>
 
-    <Grid Name="RootGrid">
+    <Grid Name="RootGrid"
+          Margin="0 0 -1 0">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WidthStates">
                 <VisualState x:Name="Mobile">
@@ -68,10 +69,11 @@
                    DisplayMode="Overlay"
                    IsPaneOpen="False"
                    OpenPaneLength="250"
+                   Margin="0 -24 0 0"
                    PaneBackground="{ThemeResource PaneBackground}"
                    Background="{ThemeResource ContentBackground}">
             <SplitView.Pane>
-                <Grid>
+                <Grid Margin="0 24 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -157,11 +159,14 @@
             <SplitView.Content>
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="24"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <Rectangle Fill="{ThemeResource AccentBrush}"/>
                     <Grid x:Name="ContentTitleBar"
-                          Background="{ThemeResource AccentBrush}">
+                          Background="{ThemeResource AccentBrush}"
+                          Grid.Row="1">
                         <TextBlock Text="UniTube"
                                    FontSize="12"
                                    TextAlignment="Center"
@@ -169,7 +174,7 @@
                                    RequestedTheme="Dark"/>
                     </Grid>
                     <Rectangle Height="192"
-                               Grid.Row="1"
+                               Grid.Row="2"
                                VerticalAlignment="Top">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -189,14 +194,14 @@
                             ToolTipService.ToolTip="Search"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Grid.Row="1"/>
+                            Grid.Row="2"/>
                     <AutoSuggestBox Name="SearchBar"
                                     PlaceholderText="Search"
                                     QueryIcon="Find"
                                     Width="240"
                                     HorizontalAlignment="Right"
                                     Margin="0 8 10 8"
-                                    Grid.Row="1"/>
+                                    Grid.Row="2"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
