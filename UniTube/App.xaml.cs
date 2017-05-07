@@ -32,7 +32,7 @@ namespace UniTube
         /// de entrada cuando la aplicación se inicie para abrir un archivo específico, por ejemplo.
         /// </summary>
         /// <param name="e">Información detallada acerca de la solicitud y el proceso de inicio.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -84,6 +84,18 @@ namespace UniTube
 
                 ApplicationView.PreferredLaunchViewSize         = new Size(1024, 651);
                 ApplicationView.PreferredLaunchWindowingMode    = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            }
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    statusBar.ForegroundColor                   = Color.FromArgb(178, 255, 255, 255);
+                    statusBar.ProgressIndicator.ProgressValue   = 0;
+                    statusBar.ProgressIndicator.Text            = "UniTube";
+                    await statusBar.ProgressIndicator.ShowAsync();
+                }
             }
         }
 
