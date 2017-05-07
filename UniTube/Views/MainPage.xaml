@@ -6,8 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:triggers="using:UniTube.Triggers"
+    xmlns:brushes="using:UniTube.Brushes"
     mc:Ignorable="d" Loaded="Page_Loaded"
     Background="{ThemeResource AccentBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <brushes:HostBackdropBrush x:Key="PaneBackground" Tint="{ThemeResource PaneBackgroundColor}"/>
+            <brushes:HostBackdropBrush x:Key="ContentBackground" Tint="{ThemeResource ContentBackgroundColor}"/>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid Name="RootGrid">
         <VisualStateManager.VisualStateGroups>
@@ -43,13 +50,13 @@
                 </VisualState>
             </VisualStateGroup>
             <VisualStateGroup x:Name="DeviceFamilyStates">
-                <VisualState x:Name="Mobile">
+                <VisualState x:Name="DesktopState">
                     <VisualState.StateTriggers>
-                        <triggers:DeviceFamilyTrigger DeviceFamily="Mobile"/>
+                        <triggers:DeviceFamilyTrigger DeviceFamily="Desktop"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ContentBackground.Visibility" Value="Collapsed"/>
-                        <Setter Target="PaneBackground.Visibility" Value="Collapsed"/>
+                        <Setter Target="splitView.PaneBackground" Value="{ThemeResource PaneBackground}"/>
+                        <Setter Target="splitView.Background" Value="{ThemeResource ContentBackground}"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -57,136 +64,129 @@
         <SplitView Name="splitView"
                    DisplayMode="Overlay"
                    IsPaneOpen="False"
-                   PaneBackground="{ThemeResource PaneBackgroundBrush}"
-                   Background="{ThemeResource ContentBackgroundBrush}"
                    OpenPaneLength="250"
-                   LightDismissOverlayMode="On">
+                   LightDismissOverlayMode="On"
+                   PaneBackground="{ThemeResource PaneBackgroundBrush}"
+                   Background="{ThemeResource ContentBackgroundBrush}">
             <SplitView.Pane>
                 <Grid>
-                    <Grid x:Name="PaneBackground"
-                          SizeChanged="PaneBackground_SizeChanged"/>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"
-                                           x:Name="RowMenu"/>
-                            <RowDefinition x:Name="RowSubs"
-                                           Height="0"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid x:Name="PaneTitleBar"/>
-                        <Rectangle Height="48" Width="48"
-                                   HorizontalAlignment="Left"
-                                   Grid.Row="1"/>
-                        <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                   Opacity="0.12"
-                                   Margin="0 10 0 0"
-                                   Grid.Row="2"
-                                   Height="1"
-                                   VerticalAlignment="Top"/>
-                        <ScrollViewer Grid.Row="2"
-                                      Margin="0 20 0 0"
-                                      VerticalScrollBarVisibility="Auto">
-                            <StackPanel>
-                                <RadioButton Content="Home" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="Home"/>
-                                <RadioButton Content="Liked" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="Liked"/>
-                                <RadioButton Content="Favorites" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="Favorites"/>
-                                <RadioButton Content="History" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="History"/>
-                                <RadioButton Content="Watch later" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="Watch later"/>
-                                <RadioButton Content="Upload video" Tag=""
-                                             GroupName="menu"
-                                             Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                             ToolTipService.ToolTip="Upload video"/>
-                            </StackPanel>
-                        </ScrollViewer>
-                        <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                   Opacity="0.12"
-                                   Margin="0 10 0 0"
-                                   Grid.Row="3"
-                                   Height="1"
-                                   VerticalAlignment="Top"
-                                   Visibility="{Binding IsPaneOpen, ElementName=splitView}"/>
-                        <ListView Grid.Row="3"
-                                  Header="Subscribed to"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"
+                                       x:Name="RowMenu"/>
+                        <RowDefinition x:Name="RowSubs"
+                                       Height="0"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="PaneTitleBar"/>
+                    <Rectangle Height="48" Width="48"
+                               HorizontalAlignment="Left"
+                               Grid.Row="1"/>
+                    <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                               Opacity="0.12"
+                               Margin="0 10 0 0"
+                               Grid.Row="2"
+                               Height="1"
+                               VerticalAlignment="Top"/>
+                    <ScrollViewer Grid.Row="2"
                                   Margin="0 20 0 0"
-                                  Visibility="{Binding IsPaneOpen, ElementName=splitView}">
-                            <ListView.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}"
-                                               Margin="10 0 0 0"
-                                               Opacity="0.6"/>
-                                </DataTemplate>
-                            </ListView.HeaderTemplate>
-                        </ListView>
-                        <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                   Opacity="0.12"
-                                   Margin="0 10 0 0"
-                                   Grid.Row="4"
-                                   Height="1"
-                                   VerticalAlignment="Top"/>
-                        <RadioButton Grid.Row="4"
-                                     Content="Settings" Tag=""
-                                     GroupName="menu"
-                                     Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
-                                     ToolTipService.ToolTip="Settings"
-                                     Margin="0 20 0 0"/>
-                    </Grid>
+                                  VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <RadioButton Content="Home" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="Home"/>
+                            <RadioButton Content="Liked" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="Liked"/>
+                            <RadioButton Content="Favorites" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="Favorites"/>
+                            <RadioButton Content="History" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="History"/>
+                            <RadioButton Content="Watch later" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="Watch later"/>
+                            <RadioButton Content="Upload video" Tag=""
+                                         GroupName="menu"
+                                         Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                         ToolTipService.ToolTip="Upload video"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                               Opacity="0.12"
+                               Margin="0 10 0 0"
+                               Grid.Row="3"
+                               Height="1"
+                               VerticalAlignment="Top"
+                               Visibility="{Binding IsPaneOpen, ElementName=splitView}"/>
+                    <ListView Grid.Row="3"
+                              Header="Subscribed to"
+                              Margin="0 20 0 0"
+                              Visibility="{Binding IsPaneOpen, ElementName=splitView}">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"
+                                           Margin="10 0 0 0"
+                                           Opacity="0.6"/>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                    </ListView>
+                    <Rectangle Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                               Opacity="0.12"
+                               Margin="0 10 0 0"
+                               Grid.Row="4"
+                               Height="1"
+                               VerticalAlignment="Top"/>
+                    <RadioButton Grid.Row="4"
+                                 Content="Settings" Tag=""
+                                 GroupName="menu"
+                                 Style="{StaticResource HamburgerMenuItemRadioButtonStyle}"
+                                 ToolTipService.ToolTip="Settings"
+                                 Margin="0 20 0 0"/>
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
-                    <Grid x:Name="ContentBackground"
-                          SizeChanged="ContentBackground_SizeChanged"/>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid x:Name="ContentTitleBar"
-                              Background="{ThemeResource AccentBrush}">
-                            <TextBlock Text="UniTube"
-                                       FontSize="12"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       RequestedTheme="Dark"/>
-                        </Grid>
-                        <Rectangle Height="192"
-                                   Grid.Row="1"
-                                   VerticalAlignment="Top">
-                            <Rectangle.Fill>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="{ThemeResource AccentColor}" Offset="0"/>
-                                    <GradientStop Color="{ThemeResource TransparentColor}" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <Button Content=""
-                                Height="48" Width="48"
-                                FontFamily="Segoe MDL2 Assets"
-                                FontSize="20"
-                                Background="Transparent"
-                                Style="{StaticResource NavigationBackButtonNormalStyle}"
-                                ToolTipService.ToolTip="Search"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Grid.Row="1"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="ContentTitleBar"
+                          Background="{ThemeResource AccentBrush}">
+                        <TextBlock Text="UniTube"
+                                   FontSize="12"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   RequestedTheme="Dark"/>
                     </Grid>
+                    <Rectangle Height="192"
+                               Grid.Row="1"
+                               VerticalAlignment="Top">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{ThemeResource AccentColor}" Offset="0"/>
+                                <GradientStop Color="{ThemeResource TransparentColor}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Content=""
+                            Height="48" Width="48"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="20"
+                            Background="Transparent"
+                            RequestedTheme="Dark"
+                            Style="{StaticResource NavigationBackButtonNormalStyle}"
+                            ToolTipService.ToolTip="Search"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Grid.Row="1"/>
                 </Grid>
             </SplitView.Content>
         </SplitView>
