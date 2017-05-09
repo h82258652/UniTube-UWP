@@ -46,7 +46,7 @@ namespace UniTube.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            splitView.IsPaneOpen = !splitView.IsPaneOpen;
+            splitView.IsSwipeablePaneOpen = !splitView.IsSwipeablePaneOpen;
         }
     }
 }

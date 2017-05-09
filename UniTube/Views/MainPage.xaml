@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:triggers="using:UniTube.Triggers"
     xmlns:brushes="using:UniTube.Brushes"
+    xmlns:controls="using:UniTube.Controls"
     mc:Ignorable="d" Loaded="Page_Loaded"
+    FontFamily="Microsoft Sans Serif"
     Background="{ThemeResource AccentBrush}">
     <Page.Resources>
         <ResourceDictionary>
@@ -38,8 +40,9 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="splitView.DisplayMode" Value="CompactInline"/>
-                        <Setter Target="splitView.IsPaneOpen" Value="False"/>
+                        <Setter Target="splitView.IsSwipeablePaneOpen" Value="False"/>
                         <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="TitleApp.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WindowLarge">
@@ -48,8 +51,9 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="splitView.DisplayMode" Value="CompactInline"/>
-                        <Setter Target="splitView.IsPaneOpen" Value="True"/>
+                        <Setter Target="splitView.IsSwipeablePaneOpen" Value="True"/>
                         <Setter Target="SearchButton.Visibility" Value="Collapsed"/>
+                        <Setter Target="TitleApp.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -65,14 +69,14 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <SplitView Name="splitView"
-                   DisplayMode="Overlay"
-                   IsPaneOpen="False"
-                   OpenPaneLength="250"
-                   Margin="0 -24 0 0"
-                   PaneBackground="{ThemeResource PaneBackground}"
-                   Background="{ThemeResource ContentBackground}">
-            <SplitView.Pane>
+        <controls:SwipeableSplitView x:Name="splitView"
+                                     DisplayMode="Overlay"
+                                     IsSwipeablePaneOpen="False"
+                                     OpenPaneLength="250"
+                                     Margin="0 -24 0 0"
+                                     PaneBackground="{ThemeResource PaneBackground}"
+                                     Background="{ThemeResource ContentBackground}">
+            <controls:SwipeableSplitView.Pane>
                 <Grid Margin="0 24 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -133,7 +137,7 @@
                     <ListView Grid.Row="3"
                               Header="Subscribed to"
                               Margin="0 20 0 0"
-                              Visibility="{Binding IsPaneOpen, ElementName=splitView}">
+                              Visibility="{Binding IsSwipeablePaneOpen, ElementName=splitView}">
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"
@@ -155,8 +159,8 @@
                                  ToolTipService.ToolTip="Settings"
                                  Margin="0 20 0 0"/>
                 </Grid>
-            </SplitView.Pane>
-            <SplitView.Content>
+            </controls:SwipeableSplitView.Pane>
+            <controls:SwipeableSplitView.Content>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"/>
@@ -173,16 +177,17 @@
                                    VerticalAlignment="Center"
                                    RequestedTheme="Dark"/>
                     </Grid>
-                    <Rectangle Height="192"
-                               Grid.Row="2"
-                               VerticalAlignment="Top">
-                        <Rectangle.Fill>
+                    <Grid Name="Color"
+                          Height="196"
+                          Grid.Row="2"
+                          VerticalAlignment="Top">
+                        <Grid.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="{ThemeResource AccentColor}" Offset="0"/>
                                 <GradientStop Color="{ThemeResource TransparentColor}" Offset="1"/>
                             </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
+                        </Grid.Background>
+                    </Grid>
                     <Button Name="SearchButton"
                             Content=""
                             Height="48" Width="48"
@@ -200,11 +205,20 @@
                                     QueryIcon="Find"
                                     Width="240"
                                     HorizontalAlignment="Right"
+                                    TextBoxStyle="{StaticResource SearchBarStyle}"
                                     Margin="0 8 10 8"
                                     Grid.Row="2"/>
+                    <Grid Name="TitleApp"
+                          VerticalAlignment="Top"
+                          Height="48"
+                          Grid.Row="2">
+                        <TextBlock Text="UniTube"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
                 </Grid>
-            </SplitView.Content>
-        </SplitView>
+            </controls:SwipeableSplitView.Content>
+        </controls:SwipeableSplitView>
         <StackPanel VerticalAlignment="Top">
             <Grid x:Name="TitleBar"
                   Background="Transparent"/>
