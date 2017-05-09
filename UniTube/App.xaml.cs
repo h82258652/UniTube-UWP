@@ -92,9 +92,6 @@ namespace UniTube
                 if (statusBar != null)
                 {
                     statusBar.ForegroundColor                   = Color.FromArgb(178, 255, 255, 255);
-                    statusBar.ProgressIndicator.ProgressValue   = 0;
-                    statusBar.ProgressIndicator.Text            = "UniTube";
-                    await statusBar.ProgressIndicator.ShowAsync();
                 }
             }
         }
