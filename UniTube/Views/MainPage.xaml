@@ -133,7 +133,7 @@
                                Grid.Row="3"
                                Height="1"
                                VerticalAlignment="Top"
-                               Visibility="{Binding IsPaneOpen, ElementName=splitView}"/>
+                               Visibility="{Binding IsSwipeablePaneOpen, ElementName=splitView}"/>
                     <ListView Grid.Row="3"
                               Header="Subscribed to"
                               Margin="0 20 0 0"

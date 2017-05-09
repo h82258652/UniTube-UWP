@@ -149,7 +149,7 @@ namespace UniTube.Controls
         }
 
         public static readonly DependencyProperty PanAreaThresholdProperty = DependencyProperty.Register(
-            nameof(PanAreaThreshold), typeof(double), typeof(SwipeableSplitView), new PropertyMetadata(0d));
+            nameof(PanAreaThreshold), typeof(double), typeof(SwipeableSplitView), new PropertyMetadata(36d));
 
         public double PanAreaThreshold
         {
